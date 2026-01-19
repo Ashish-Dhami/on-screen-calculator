@@ -11,10 +11,20 @@
   <body>
     <div class="calculator">
       <div class="calculator__wrap">
+        <div class="preview">
+          <span class="num1"></span>
+          <span class="operator"></span>
+          <span class="num2"></span>
+          <span class="hidden">Ans</span>
+          <span>=</span>
+          <span class="ans"></span>
+        </div>
         <div class="calculator__display">0</div>
         <div class="calculator__functions">
           <button value="clear" class="btn--opaque">AC</button>
-          <button value="pos-neg" class="btn--opaque">+/-</button>
+          <button value="backspace" class="btn--opaque">
+            <img src="icons/backspace.png" alt="backspace button" width="44" />
+          </button>
           <button value="%" class="btn--opaque">%</button>
           <button value="/" class="btn--opaque">/</button>
           <button value="7">7</button>
