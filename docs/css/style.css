@@ -23,6 +23,9 @@ body {
 .calculator {
   max-width: 320px;
   box-shadow: 0 0 75px 30px rgba(205, 205, 205, 0.7);
+  &:focus {
+    outline: 1px solid rgba(86, 108, 204, 0.7);
+  }
 }
 
 .calculator__display {
@@ -73,14 +76,18 @@ body {
     &.focus {
       background: rgb(241, 241, 98, 0.7);
     }
-    &:active {
+    &:is(:active, .is-active) {
       background: rgba(255, 255, 255, 0.3);
     }
-    &[value="="]:active {
+    &:is([value="="]:active, [value="="].is-active) {
       background: rgba(60, 86, 198, 0.7);
     }
-    &[value="clear"]:active,
-    &[value="backspace"]:active {
+    &:is(
+        [value="clear"]:active,
+        [value="clear"].is-active,
+        [value="backspace"]:active,
+        [value="backspace"].is-active
+      ) {
       background: rgba(182, 24, 24, 0.7);
     }
   }

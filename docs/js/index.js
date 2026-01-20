@@ -147,8 +147,34 @@ buttons.addEventListener("click", (e) => {
   logger();
 });
 
+// ---------- Keyboard logic--start -----------------------
+const allowed = {
+  "+": "+",
+  "-": "-",
+  "/": "/",
+  "*": "*",
+  "%": "%",
+  "=": "=",
+  ".": ".",
+  Enter: "=",
+  Backspace: "backspace",
+  Delete: "clear",
+};
+const calc = document.querySelector(".calculator");
+calc.addEventListener("keydown", (e) => {
+  if (!(e.key in allowed || /^\d$/.test(e.key))) return;
+  e.preventDefault();
+  const value = allowed[e.key] ?? e.key;
+  const btn = buttons.querySelector(`button[value='${value}']`);
+  if (!btn) return;
+  btn.classList.add("is-active");
+  btn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  setTimeout(() => btn.classList.remove("is-active"), 100);
+});
+calc.focus();
+// ---------- Keyboard logic--end -----------------------
+
 let num1, num2, operator;
 init();
 
-//todo: -ve number support
-//todo: keyboard support
+//TODO: -ve number support
