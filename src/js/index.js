@@ -1,40 +1,40 @@
-function add(a, b) {
-  return a + b;
-}
-function subtract(a, b) {
-  return a - b;
-}
-function multiply(a, b) {
-  return a * b;
-}
-function divide(a, b) {
-  return a / b;
-}
-function modulus(a, b) {
-  return a % b;
-}
+const operations = {
+  add(a, b) {
+    return a + b;
+  },
+  subtract(a, b) {
+    return a - b;
+  },
+  multiply(a, b) {
+    return a * b;
+  },
+  divide(a, b) {
+    return a / b;
+  },
+  modulus(a, b) {
+    return a % b;
+  },
+};
 
 function operate(operator, a, b) {
   let result;
   switch (operator) {
     case "+":
-      result = add(a, b);
+      result = operations.add(a, b);
       break;
     case "-":
-      result = subtract(a, b);
+      result = operations.subtract(a, b);
       break;
     case "*":
-      result = multiply(a, b);
+      result = operations.multiply(a, b);
       break;
     case "%":
-      if (b === 0) break;
-      result = modulus(a, b);
+      result = operations.modulus(a, b);
       break;
     case "/":
-      if (b === 0) break;
-      result = divide(a, b);
+      result = operations.divide(a, b);
   }
-  return result ?? `ERROR!`;
+  return !isFinite(result) ? `ERROR!` : result;
 }
 
 function renderResult(chained = true) {
@@ -108,7 +108,7 @@ buttons.addEventListener("click", (e) => {
     logger();
     return;
   }
-  if (isNaN(val)) {
+  if (isNaN(val) && val != ".") {
     let chained = val != "=" && !!num1;
     if (operator && num1 && num2) {
       [num1, num2] = [renderResult(chained) ?? "", ""];
@@ -116,11 +116,15 @@ buttons.addEventListener("click", (e) => {
     operator = !(chained && num1) ? null : val;
   } else {
     if (!operator) {
+      if (val == "." && num1.includes(".")) return;
       num1 += val;
-      display.textContent = num1 = parseFloat(num1).toString();
+      if (!num1.includes(".")) num1 = parseFloat(num1).toString();
+      display.textContent = num1;
     } else {
+      if (val == "." && num2.includes(".")) return;
       num2 += val;
-      display.textContent = num2 = parseFloat(num2).toString();
+      if (!num2.includes(".")) num2 = parseFloat(num2).toString();
+      display.textContent = num2;
     }
   }
   updatePreview();
@@ -131,5 +135,4 @@ let num1, num2, operator;
 init();
 
 //todo: -ve number support
-//todo: float number support
 //todo: keyboard support
