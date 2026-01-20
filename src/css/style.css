@@ -4,6 +4,12 @@ html,
 body {
   height: 100%;
   min-height: 100%;
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }
 
 body {
@@ -20,10 +26,22 @@ body {
 }
 
 .calculator__display {
-  padding: 10px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 4em;
-  text-align: right;
+  padding: 4px 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 4rem;
+  transition: font-size 100ms ease-out;
+  min-height: 5rem;
+  display: grid;
+  align-items: center;
+  justify-items: end;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chromium/Safari */
+  }
 }
 
 .calculator__functions {
@@ -52,11 +70,19 @@ body {
   }
 }
 .preview {
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 600;
-  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
   text-align: right;
+  font-weight: 600;
+  font-size: 1.1rem;
   padding: 4px 10px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chromium/Safari */
+  }
 }
 .hidden {
   display: none;

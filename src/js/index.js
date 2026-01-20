@@ -65,6 +65,15 @@ function updatePreview() {
     ans_preview.textContent = "";
     hidden_preview.classList.add("hidden");
   }
+  updateFontSize(display.textContent);
+  display.scrollLeft = display.scrollWidth;
+  num1_preview.parentElement.scrollLeft =
+    num1_preview.parentElement.scrollWidth;
+}
+
+function updateFontSize(value) {
+  const length = value.replace(/\s/g, "").length;
+  display.style.fontSize = length > 8 ? "2rem" : "4rem";
 }
 
 const display = document.querySelector(".calculator__display");
@@ -78,7 +87,6 @@ buttons.addEventListener("click", (e) => {
   let val = e.target.value;
   if (val == "clear") {
     init();
-    updatePreview();
     return;
   }
   if (val == "backspace") {
