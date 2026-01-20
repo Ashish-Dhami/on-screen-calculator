@@ -10,6 +10,9 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
+function modulus(a, b) {
+  return a % b;
+}
 
 function operate(operator, a, b) {
   let result;
@@ -22,6 +25,10 @@ function operate(operator, a, b) {
       break;
     case "*":
       result = multiply(a, b);
+      break;
+    case "%":
+      if (b === 0) break;
+      result = modulus(a, b);
       break;
     case "/":
       if (b === 0) break;
