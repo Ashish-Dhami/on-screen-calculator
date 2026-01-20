@@ -67,6 +67,22 @@ body {
         pointer-events: none;
       }
     }
+    &.btn--opaque:hover:not(.focus, :active) {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    &.focus {
+      background: rgb(241, 241, 98, 0.7);
+    }
+    &:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    &[value="="]:active {
+      background: rgba(60, 86, 198, 0.7);
+    }
+    &[value="clear"]:active,
+    &[value="backspace"]:active {
+      background: rgba(182, 24, 24, 0.7);
+    }
   }
 }
 .preview {

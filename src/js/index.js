@@ -82,6 +82,19 @@ function updateFontSize(value) {
   const length = value.replace(/\s/g, "").length;
   display.style.fontSize = length > 8 ? "2rem" : "4rem";
 }
+function toggleFocus(newBtn, prevBtnVal) {
+  if (newBtn?.value == prevBtnVal) {
+    return;
+  }
+  if (prevBtnVal) {
+    buttons
+      .querySelector(`button[value='${prevBtnVal}']`)
+      .classList.remove("focus");
+  }
+  if (newBtn && newBtn.value != "=") {
+    newBtn.classList.add("focus");
+  }
+}
 
 const display = document.querySelector(".calculator__display");
 const buttons = document.querySelector(".calculator__functions");
@@ -92,7 +105,9 @@ const ans_preview = document.querySelector(".preview .ans");
 const hidden_preview = document.querySelector(".preview .hidden");
 buttons.addEventListener("click", (e) => {
   let val = e.target.value;
+  let prevOperatorRef = operator;
   if (val == "clear") {
+    toggleFocus(null, prevOperatorRef);
     init();
     return;
   }
@@ -114,6 +129,7 @@ buttons.addEventListener("click", (e) => {
       [num1, num2] = [renderResult(chained) ?? "", ""];
     }
     operator = !(chained && num1) ? null : val;
+    toggleFocus(!(chained && num1) ? null : e.target, prevOperatorRef);
   } else {
     if (!operator) {
       if (val == "." && num1.includes(".")) return;
